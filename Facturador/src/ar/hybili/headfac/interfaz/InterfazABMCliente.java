@@ -55,13 +55,20 @@ public class InterfazABMCliente extends JFrame {
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent arg0) {				
-				_listaClientes.add(panelClienteBasico.obtenerCliente());
+			public void actionPerformed(ActionEvent arg0) {	
+				
+				panelClienteBasico.obtenerCliente().save();
+				panelClienteBasico.limpiarPanel();
+				/**
+				_listaClientes.add(panelClienteBasico.obtenerCliente());								
+				
 				System.out.println(_listaClientes.toString());
 
 				for (int i=0;i<_listaClientes.size();i++) {
 					System.out.println(_listaClientes.get(i).toString());
+					_listaClientes.get(i).save();
 				}
+				**/
 			}
 
 		});

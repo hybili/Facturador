@@ -1,5 +1,6 @@
 package ar.hybili.headfac.clases;
 
+import ar.hybili.headfac.conexiones.*;
 import java.util.ArrayList;
 
 //import ar.hybili.headfac.clases.*;
@@ -203,6 +204,12 @@ public class Cliente {
 		this._listaTelefonos = _listaTelefonos;
 	}
 
-	
+	public void save(){
+        ConectorSQLite con = new ConectorSQLite();
+        con.setUrl("C:/Users/maria_000/Documents/SQLite/Facturador/Clientes.sqlite");
+        con.connect();
+        con.saveClienteBase(this);
+        con.close();
+    }	
 	
 }

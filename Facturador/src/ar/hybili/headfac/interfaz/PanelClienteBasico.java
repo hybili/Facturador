@@ -16,7 +16,7 @@ import ar.hybili.headfac.clases.TipoIvaCliente;
 
 import java.awt.Color;
 
-public class PanelClienteBasico extends JPanel {
+public class PanelClienteBasico extends PanelBase {
 	private JTextField tfId;
 	private JTextField tfNombre;
 	private JTextField tfRazonSocial;

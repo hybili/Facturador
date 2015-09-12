@@ -1,7 +1,10 @@
 package ar.hybili.headfac.conexiones;
 
+import ar.hybili.headfac.clases.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +30,34 @@ public class ConectorSQLite {
 			connect.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(ConectorSQLite.class.getName()).log(Level.SEVERE, null, ex);
+		}		
+	}
+
+	public void saveClienteBase(Cliente cliente){
+		try {
+			PreparedStatement st = connect.prepareStatement("insert into base (orden, radio, codigoPostal, cuit, nroIIBB, saldo, nombre, razonSocial, razonSocialFiscal, contacto, direccion, localidad, codigoPostalCompleto) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+			st.setInt(1, cliente.get_orden());
+			st.setInt(2, cliente.get_radio());
+			st.setInt(3, cliente.get_codigoPostal());
+			
+			st.setDouble(4, cliente.get_cuit());
+			st.setDouble(5, cliente.get_nroIIBB());
+			st.setDouble(6, cliente.get_cuit());
+			
+			st.setString(7, cliente.get_nombre());
+			st.setString(8, cliente.get_razonSocial());
+			st.setString(9, cliente.get_razonSocialFiscal());
+			st.setString(10, cliente.get_contacto());
+			st.setString(11, cliente.get_direccion());
+			st.setString(12, cliente.get_localidad());
+			st.setString(13, cliente.get_codigoPostalCompleto());						
+			
+			st.execute();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
 		}
+
 	}
 
 	@Override
