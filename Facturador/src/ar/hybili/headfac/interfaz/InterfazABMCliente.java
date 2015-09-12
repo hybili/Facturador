@@ -72,6 +72,7 @@ public class InterfazABMCliente extends JFrame {
 			}
 
 		});
+		
 		contentPane.add(btnAgregar, BorderLayout.SOUTH);
 	}
 
