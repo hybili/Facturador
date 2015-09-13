@@ -37,7 +37,6 @@ public class ConectorSQLite {
 			Logger.getLogger(ConectorSQLite.class.getName()).log(Level.SEVERE, null, ex);
 		}		
 	}
-
 	public void saveClienteBase(Cliente cliente){
 		try {
 			PreparedStatement st = connect.prepareStatement("insert into base (orden, radio, codigoPostal, cuit, nroIIBB, saldo, nombre, razonSocial, razonSocialFiscal, contacto, direccion, localidad, codigoPostalCompleto) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -72,7 +71,7 @@ public class ConectorSQLite {
 		try {
 			PreparedStatement st = connect.prepareStatement("select * from base where id=" + id);
 			result = st.executeQuery();
-			if (result != null) {
+			if (result.isBeforeFirst()) {
 				while (result.next()) {
 					System.out.print("ID: ");
 					System.out.println(result.getInt("id"));
@@ -95,8 +94,6 @@ public class ConectorSQLite {
 
 		return clienteAux;
 	}
-
-
 	@Override
 	public String toString() {
 		return "ConectorSQLite [url=" + url + ", connect=" + connect + "]";

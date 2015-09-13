@@ -205,8 +205,7 @@ public class Cliente {
 	}
 
 	public void save(){
-        ConectorSQLite con = new ConectorSQLite();
-        con.setUrl("C:/Users/maria_000/Documents/SQLite/Facturador/Clientes.sqlite");
+        ConectorSQLite con = new ConectorSQLite();        
         con.connect();
         con.saveClienteBase(this);
         con.close();

@@ -1,4 +1,4 @@
-package ar.hybili.headfac.interfaz;
+package ar.hybili.headfac.paneles;
 
 import java.awt.Component;
 

@@ -1,6 +1,8 @@
 package ar.hybili.headfac.interfaz;
 
 import ar.hybili.headfac.clases.*;
+import ar.hybili.headfac.paneles.PanelClienteBasico;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 

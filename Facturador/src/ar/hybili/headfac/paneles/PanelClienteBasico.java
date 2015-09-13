@@ -1,4 +1,4 @@
-package ar.hybili.headfac.interfaz;
+package ar.hybili.headfac.paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -108,7 +108,9 @@ public class PanelClienteBasico extends PanelBase {
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_ENTER) {	               
 					System.out.println("ENTER pressed");
-					buscarCliente(Integer.parseInt(tfId.getText()));
+					if (!tfId.getText().isEmpty()) {
+						buscarCliente(Integer.parseInt(tfId.getText()));
+					}
 				}
 			}
 		});
@@ -127,17 +129,18 @@ public class PanelClienteBasico extends PanelBase {
 
 		Cliente clienteAux = null;
 
-		ConectorSQLite con = new ConectorSQLite();
-		con.connect();
-		clienteAux = con.findCliente(id);
-		con.close(); 
-		
-		if (clienteAux != null) { 
-			System.out.println(clienteAux.toString());		
-		} else {
-			System.out.println("Sin cliente");
+		if (id>0){
+			ConectorSQLite con = new ConectorSQLite();
+			con.connect();
+			clienteAux = con.findCliente(id);
+			con.close(); 
+
+			if (clienteAux != null) { 
+				System.out.println(clienteAux.toString());		
+			} else {
+				System.out.println("Sin cliente");
+			}
 		}
-		
 		return clienteAux;
 	}
 
