@@ -39,6 +39,11 @@ public class ConectorSQLite {
 			Logger.getLogger(ConectorSQLite.class.getName()).log(Level.SEVERE, null, ex);
 		}		
 	}
+	
+	public Connection obtenerConexion(){
+		return this.connect;
+	}
+	
 	public void saveClienteBase(Cliente cliente){
 		try {
 			PreparedStatement st = connect.prepareStatement("insert into base (orden, radio, codigoPostal, cuit, nroIIBB, saldo, nombre, razonSocial, razonSocialFiscal, contacto, direccion, localidad, codigoPostalCompleto) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
