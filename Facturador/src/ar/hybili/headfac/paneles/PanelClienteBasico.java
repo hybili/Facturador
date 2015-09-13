@@ -136,7 +136,9 @@ public class PanelClienteBasico extends PanelBase {
 			con.close(); 
 
 			if (clienteAux != null) { 
-				System.out.println(clienteAux.toString());		
+				System.out.println(clienteAux.toString());	
+				cargarCliente(clienteAux);
+				tfId.enable(false);				
 			} else {
 				System.out.println("Sin cliente");
 			}
@@ -144,6 +146,17 @@ public class PanelClienteBasico extends PanelBase {
 		return clienteAux;
 	}
 
+	public void cargarCliente(Cliente cliente){
+		//tfId.setText(Integer.toString(cliente.get_id()));
+		tfNombre.setText(cliente.get_nombre());
+		tfRazonSocial.setText(cliente.get_nombre());
+		tfRazonSocialFiscal.setText(cliente.get_razonSocialFiscal());
+		tfCuit.setText(Double.toString(cliente.get_cuit()));
+		tfDireccion.setText(cliente.get_direccion());
+		tfLocalidad.setText(cliente.get_localidad());
+		tfCodigoPostal.setText(Integer.toString(cliente.get_codigoPostal()));
+		tfCodigoPostalCompleto.setText(cliente.get_codigoPostalCompleto());		
+	}
 
 }
 

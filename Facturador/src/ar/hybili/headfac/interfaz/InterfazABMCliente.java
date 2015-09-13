@@ -54,28 +54,33 @@ public class InterfazABMCliente extends JFrame {
 		final PanelClienteBasico panelClienteBasico = new PanelClienteBasico();
 		contentPane.add(panelClienteBasico, BorderLayout.NORTH);
 
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		contentPane.add(splitPane, BorderLayout.SOUTH);
+
 		JButton btnAgregar = new JButton("Agregar");
+		splitPane.setLeftComponent(btnAgregar);
+
+		JButton btnSalir = new JButton("Salir");
+		splitPane.setRightComponent(btnSalir);
+
 		btnAgregar.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent arg0) {	
-				
+			public void actionPerformed(ActionEvent arg0) {							
 				panelClienteBasico.obtenerCliente().save();
-				panelClienteBasico.limpiarPanel();
-				/**
-				_listaClientes.add(panelClienteBasico.obtenerCliente());								
-				
-				System.out.println(_listaClientes.toString());
-
-				for (int i=0;i<_listaClientes.size();i++) {
-					System.out.println(_listaClientes.get(i).toString());
-					_listaClientes.get(i).save();
-				}
-				**/
+				panelClienteBasico.limpiarPanel();						
 			}
 
 		});
-		
-		contentPane.add(btnAgregar, BorderLayout.SOUTH);
+
+		btnSalir.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {							
+				System.exit(0);				
+			}
+
+		});
 	}
 
 }

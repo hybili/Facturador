@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,6 +74,8 @@ public class ConectorSQLite {
 			result = st.executeQuery();
 			if (result.isBeforeFirst()) {
 				while (result.next()) {
+					
+					clienteAux = new Cliente(result.getInt("id"),result.getString("nombre"),result.getString("razonSocial"),result.getString("razonSocialFiscal"),result.getDouble("cuit"),result.getString("direccion"),result.getString("localidad"),result.getInt("codigoPostal"),result.getString("codigoPostalCompleto"),TipoIvaCliente.INSCRIPTO);
 					System.out.print("ID: ");
 					System.out.println(result.getInt("id"));
 
@@ -94,6 +97,32 @@ public class ConectorSQLite {
 
 		return clienteAux;
 	}
+	
+	public ArrayList<Cliente> listaDeCliente(){
+		
+		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+		
+		ResultSet result = null;
+		Cliente clienteAux = null;
+
+		try {
+			PreparedStatement st = connect.prepareStatement("select * from base");
+			result = st.executeQuery();
+			if (result.isBeforeFirst()) {
+				while (result.next()) {					
+					clienteAux = new Cliente(result.getInt("id"),result.getString("nombre"),result.getString("razonSocial"),result.getString("razonSocialFiscal"),result.getDouble("cuit"),result.getString("direccion"),result.getString("localidad"),result.getInt("codigoPostal"),result.getString("codigoPostalCompleto"),TipoIvaCliente.INSCRIPTO);					
+					listaClientes.add(clienteAux);
+				}
+			} else {
+				System.out.println("No hay registros");
+			}
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}			
+		return listaClientes;				
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "ConectorSQLite [url=" + url + ", connect=" + connect + "]";
