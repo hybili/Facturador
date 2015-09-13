@@ -15,6 +15,7 @@ import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import net.miginfocom.swing.MigLayout;
 
 public class InterfazABMCliente extends JFrame {
 
@@ -53,34 +54,42 @@ public class InterfazABMCliente extends JFrame {
 
 		final PanelClienteBasico panelClienteBasico = new PanelClienteBasico();
 		contentPane.add(panelClienteBasico, BorderLayout.NORTH);
-
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setEnabled(false);
-		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane, BorderLayout.SOUTH);
-
-		JButton btnAgregar = new JButton("Agregar");
-		splitPane.setLeftComponent(btnAgregar);
-
-		JButton btnSalir = new JButton("Salir");
-		splitPane.setRightComponent(btnSalir);
-
-		btnAgregar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {							
-				panelClienteBasico.obtenerCliente().save();
-				panelClienteBasico.limpiarPanel();						
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[434px]", "[118px]"));
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InterfazBusquedaClienteNombre interBusquedaNombre = new InterfazBusquedaClienteNombre();
+				interBusquedaNombre.main(null);				
 			}
-
 		});
-
-		btnSalir.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {							
-				System.exit(0);				
-			}
-
-		});
+		panel.add(btnBuscar, "cell 0 0,alignx center,aligny bottom");
+		
+				JButton btnAgregar = new JButton("Agregar");
+				panel.add(btnAgregar, "cell 0 0,alignx left,aligny bottom");
+				
+						JButton btnSalir = new JButton("Salir");
+						panel.add(btnSalir, "cell 0 0,alignx left,aligny bottom");
+						
+								btnSalir.addActionListener(new ActionListener() {
+						
+									public void actionPerformed(ActionEvent arg0) {							
+										System.exit(0);				
+									}
+						
+								});
+				
+						btnAgregar.addActionListener(new ActionListener() {
+				
+							public void actionPerformed(ActionEvent arg0) {							
+								panelClienteBasico.obtenerCliente().save();
+								panelClienteBasico.limpiarPanel();						
+							}
+				
+						});
 	}
 
 }
