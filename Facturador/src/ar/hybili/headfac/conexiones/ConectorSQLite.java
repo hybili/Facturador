@@ -25,7 +25,7 @@ public class ConectorSQLite {
 		try {
 			connect = DriverManager.getConnection("jdbc:sqlite:"+url);
 			if (connect!=null) {
-				System.out.println("Conectado");
+				//System.out.println("Conectado");
 			}
 		}catch (SQLException ex) {
 			System.err.println("No se ha podido conectar a la base de datos\n"+ex.getMessage());
@@ -82,6 +82,7 @@ public class ConectorSQLite {
 				while (result.next()) {
 					
 					clienteAux = new Cliente(result.getInt("id"),result.getString("nombre"),result.getString("razonSocial"),result.getString("razonSocialFiscal"),result.getDouble("cuit"),result.getString("direccion"),result.getString("localidad"),result.getInt("codigoPostal"),result.getString("codigoPostalCompleto"),TipoIvaCliente.INSCRIPTO);
+					/**
 					System.out.print("ID: ");
 					System.out.println(result.getInt("id"));
 
@@ -92,10 +93,11 @@ public class ConectorSQLite {
 					System.out.println(result.getString("razonSocial"));
 
 					System.out.println("=======================");
+					**/
 
 				}
 			} else {
-				System.out.println("No hay registros");
+				//System.out.println("No hay registros");
 			}
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
@@ -104,15 +106,19 @@ public class ConectorSQLite {
 		return clienteAux;
 	}
 	
-	public ArrayList<Cliente> listaDeCliente(){
+	public ArrayList<Cliente> listaDeCliente(String busqueda){
 		
 		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 		
 		ResultSet result = null;
 		Cliente clienteAux = null;
+		
+		if (busqueda=="") {
+			busqueda = "select * from base";
+		}
 
 		try {
-			PreparedStatement st = connect.prepareStatement("select * from base");
+			PreparedStatement st = connect.prepareStatement(busqueda);
 			result = st.executeQuery();
 			if (result.isBeforeFirst()) {
 				

@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import java.awt.FlowLayout;
@@ -107,7 +108,7 @@ public class PanelClienteBasico extends PanelBase {
 			public void keyPressed(KeyEvent e) {
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_ENTER) {	               
-					System.out.println("ENTER pressed");
+					//System.out.println("ENTER pressed");
 					if (!tfId.getText().isEmpty()) {
 						buscarCliente(Integer.parseInt(tfId.getText()));
 					}
@@ -137,17 +138,16 @@ public class PanelClienteBasico extends PanelBase {
 
 			if (clienteAux != null) { 
 				System.out.println(clienteAux.toString());	
-				cargarCliente(clienteAux);
-				tfId.enable(false);				
+				cargarCliente(clienteAux);						
 			} else {
-				System.out.println("Sin cliente");
+				JOptionPane.showMessageDialog(null, "No existe el cliente");
 			}
 		}
 		return clienteAux;
 	}
 
 	public void cargarCliente(Cliente cliente){
-		//tfId.setText(Integer.toString(cliente.get_id()));
+		tfId.setText(Integer.toString(cliente.get_id()));
 		tfNombre.setText(cliente.get_nombre());
 		tfRazonSocial.setText(cliente.get_nombre());
 		tfRazonSocialFiscal.setText(cliente.get_razonSocialFiscal());
@@ -155,7 +155,8 @@ public class PanelClienteBasico extends PanelBase {
 		tfDireccion.setText(cliente.get_direccion());
 		tfLocalidad.setText(cliente.get_localidad());
 		tfCodigoPostal.setText(Integer.toString(cliente.get_codigoPostal()));
-		tfCodigoPostalCompleto.setText(cliente.get_codigoPostalCompleto());		
+		tfCodigoPostalCompleto.setText(cliente.get_codigoPostalCompleto());	
+		tfId.enable(false);		
 	}
 
 }

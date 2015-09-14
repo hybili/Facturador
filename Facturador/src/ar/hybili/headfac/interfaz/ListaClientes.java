@@ -21,7 +21,7 @@ public class ListaClientes {
 		ConectorSQLite con = new ConectorSQLite();
 
 		con.connect();	 
-		listaClientes = con.listaDeCliente();
+		listaClientes = con.listaDeCliente("");
 
 		try {
 			JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile("C:/Users/maria_000/Google Drive/Programacion/GitHub Facturador/Facturador/ReporteCienteBse.jasper");

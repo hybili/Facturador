@@ -20,7 +20,11 @@ import net.miginfocom.swing.MigLayout;
 public class InterfazABMCliente extends JFrame {
 
 	private JPanel contentPane;
-
+	private Cliente clienteSeleccionado=null;
+	private PanelClienteBasico panelClienteBasico=null;
+	private static InterfazABMCliente frame;
+	private JButton btnAgregar = new JButton("Agregar");
+	
 	ArrayList<Cliente> _listaClientes = new ArrayList<Cliente>();
 
 	/**
@@ -30,7 +34,7 @@ public class InterfazABMCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfazABMCliente frame = new InterfazABMCliente();
+					frame = new InterfazABMCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,44 +56,49 @@ public class InterfazABMCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		final PanelClienteBasico panelClienteBasico = new PanelClienteBasico();
+		panelClienteBasico = new PanelClienteBasico();
 		contentPane.add(panelClienteBasico, BorderLayout.NORTH);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new MigLayout("", "[434px]", "[118px]"));
-		
+
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfazBusquedaClienteNombre interBusquedaNombre = new InterfazBusquedaClienteNombre();
-				interBusquedaNombre.main(null);				
+				InterfazBusquedaClienteNombre interBusquedaNombre = new InterfazBusquedaClienteNombre(frame);
+				interBusquedaNombre.setVisible(true);					
 			}
 		});
-		panel.add(btnBuscar, "cell 0 0,alignx center,aligny bottom");
+		panel.add(btnBuscar, "flowx,cell 0 0,alignx center,aligny bottom");
+
 		
-				JButton btnAgregar = new JButton("Agregar");
-				panel.add(btnAgregar, "cell 0 0,alignx left,aligny bottom");
-				
-						JButton btnSalir = new JButton("Salir");
-						panel.add(btnSalir, "cell 0 0,alignx left,aligny bottom");
-						
-								btnSalir.addActionListener(new ActionListener() {
-						
-									public void actionPerformed(ActionEvent arg0) {							
-										System.exit(0);				
-									}
-						
-								});
-				
-						btnAgregar.addActionListener(new ActionListener() {
-				
-							public void actionPerformed(ActionEvent arg0) {							
-								panelClienteBasico.obtenerCliente().save();
-								panelClienteBasico.limpiarPanel();						
-							}
-				
-						});
+		panel.add(btnAgregar, "cell 0 0,alignx left,aligny bottom");
+
+		JButton btnSalir = new JButton("Salir");
+		panel.add(btnSalir, "cell 0 0,alignx left,aligny bottom");
+
+		btnSalir.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {							
+				System.exit(0);				
+			}
+
+		});
+
+		btnAgregar.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {							
+				panelClienteBasico.obtenerCliente().save();
+				panelClienteBasico.limpiarPanel();						
+			}
+
+		});
+	}
+	
+	public void cargarCliente(Cliente cliente){
+		panelClienteBasico.cargarCliente(cliente);
+		btnAgregar.setEnabled(false);
 	}
 
 }

@@ -54,32 +54,44 @@ public class PanelBusqueda extends PanelBase {
 	 * Create the frame.
 	 */
 	public PanelBusqueda() {
-		
+
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
 		JLabel lblNombre = new JLabel("Buscar");
 		add(lblNombre, "cell 0 0,alignx left");
-		
+
 		tfNombre = new JTextField();
 		add(tfNombre, "cell 1 0,growx");
 		tfNombre.setColumns(10);
-		
+
 		cargarLista();
-		
+
 		listBusqueda = new JList();
 		listBusqueda.setModel(list_model);	
 		add(listBusqueda, "cell 0 1 2 1,grow");
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 	}
-	
+
 	private void cargarLista(){
 		ConectorSQLite con = new ConectorSQLite();
 		con.connect();
-		list_model = new ClienteBaseListModel(con.listaDeCliente());
+		list_model = new ClienteBaseListModel(con.listaDeCliente("Select * from base order by nombre"));
 		con.close();
 	}
 	
+	public Cliente clienteSeleccionado() {
+		Cliente clienteAux = null;
+		
+		int seleccion = listBusqueda.getSelectedIndex();
+		
+		if (seleccion!=-1){
+			clienteAux = list_model.getCliente(seleccion);
+		}
+		
+		return clienteAux;
+	}
+
 }
