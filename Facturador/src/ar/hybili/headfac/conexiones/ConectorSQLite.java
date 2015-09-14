@@ -1,4 +1,4 @@
-package ar.hybili.headfac.conexiones;
+	package ar.hybili.headfac.conexiones;
 
 import ar.hybili.headfac.clases.*;
 
@@ -150,6 +150,32 @@ public class ConectorSQLite {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public void saveProductoBase(Producto producto){
+		try {
+			PreparedStatement st = connect.prepareStatement("insert into base (nombre, descripcion, rubro, subrubro, caracteristica_1, caracteristica_2, precio_venta, precio_compra, stock, codigo_barras) values (?,?,?,?,?,?,?,?,?,?)");
+
+			st.setString(1, producto.getNombre());
+			st.setString(2, producto.getDescripcion());
+			
+			st.setInt(3, producto.getRubro());
+			st.setDouble(4, producto.getSubrubro());
+			st.setDouble(5, producto.getCaracteristica_1());
+			st.setDouble(6, producto.getCaracteristica_2());
+
+			st.setDouble(7, producto.getPrecioVentas());
+			st.setDouble(8, producto.getPrecioCompra());
+			
+			st.setFloat(9, producto.getStock());
+			
+			st.setInt(10, producto.getCodigoBarras());
+			
+			st.execute();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+
 	}
 
 }

@@ -7,26 +7,26 @@ import java.util.ArrayList;
 
 public class Cliente {
 	
-	int _id;
-	int _orden;
-	int _radio;
-	int _codigoPostal;
+	private int _id;
+	private int _orden;
+	private int _radio;
+	private int _codigoPostal;
 	
-	double _cuit;
-	double _nroIIBB;
-	double _saldo;
+	private double _cuit;
+	private double _nroIIBB;
+	private double _saldo;
 	
-	String _nombre;
-	String _razonSocial;
-	String _razonSocialFiscal;	
-	String _contacto;
-	String _direccion;
-	String _localidad;	
-	String _codigoPostalCompleto;
+	private String _nombre;
+	private String _razonSocial;
+	private String _razonSocialFiscal;	
+	private String _contacto;
+	private String _direccion;
+	private String _localidad;	
+	private String _codigoPostalCompleto;
 
-	TipoIvaCliente _tipoIvaCliente;
+	private TipoIvaCliente _tipoIvaCliente;
 	//Telefono _telefono;
-	ArrayList<Telefono> _listaTelefonos = new ArrayList<Telefono>();	
+	private ArrayList<Telefono> _listaTelefonos = new ArrayList<Telefono>();	
 	
 	public void agregarTelefono(Telefono tel){
 		_listaTelefonos.add(tel);
